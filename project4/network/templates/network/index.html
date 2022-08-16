@@ -1,5 +1,16 @@
 {% extends "network/layout.html" %}
+{% load static %}
+
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script> 
+{% endblock %}
 
 {% block body %}
-    TODO
+    <div class="new-post">
+        <textarea class="form-control" id="new-post-text" placeholder="What's on your mind?"></textarea>
+        <input type="submit" class="btn btn-primary" id="add-post" value="Post">
+    </div>
 {% endblock %}
+
+
+        
