@@ -20,5 +20,7 @@ document.addEventListener('DOMContentLoaded', function(){
           .then(result => {
             console.log(result);
           });
+
+          document.querySelector('#new-post-text').value = 'What\'s on your mind?'
     }
 })
