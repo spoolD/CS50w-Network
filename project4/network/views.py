@@ -7,11 +7,20 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-from .models import User
+from .models import User, Posting
 
 
 def index(request):
-    return render(request, "network/index.html")
+    # Make request to get all posts sorted by timestamp
+    postings = ['test']
+    # For each post add div
+        #Display Number of Likes
+        #Display author
+        #Display Timestamp
+        #Display Content
+
+    # Add new divs to display
+    return render(request, "network/index.html", {"postings": postings})
 
 
 def login_view(request):
@@ -69,6 +78,9 @@ def register(request):
 @login_required
 def post(request):
     data = json.loads(request.body)
-
-    print(data)
+    post = Posting(
+         author = request.user,
+         body = data.get("content", ""),
+     )
+    post.save()
     return JsonResponse({"message": "Added post successfully."}, status=201)
