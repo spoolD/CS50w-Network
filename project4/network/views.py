@@ -11,8 +11,11 @@ from .models import User, Posting
 
 
 def index(request):
-    # Make request to get all posts sorted by timestamp
-    postings = Posting.objects.all().order_by('timestamp').values
+    # Make request to get all posts
+    postings = Posting.objects.all()
+
+    # Sort by timestamp
+    
     # For each post add div
         #Display Number of Likes
         #Display author

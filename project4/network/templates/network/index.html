@@ -12,7 +12,10 @@
     </div>
 
     {% for posting in postings %}
-        <p>{{posting}}</p>
+        <p>{{posting.author.username}}</p>
+        <p>{{posting.timestamp}}</p>
+        <p>{{posting.body}}</p>
+        <p>{{posting.likes}}</p>
         
     {% endfor %}
 {% endblock %}
