@@ -6,3 +6,27 @@
 .new-post input{
     margin: 5px auto;
 }
+
+.post {
+    width: 90%;
+    margin: 10px auto;
+    background: rgb(245, 245, 245);
+    border-radius: 5px;
+    border: 1px solid rgb(156, 183, 206);
+    padding: 5px 15px;
+}
+
+.post div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.author {
+    font: 20pt bold; 
+}
+.timestamp{
+    font: 9pt thin;
+}
+.post-content{
+    font: 16pt bold;
+}

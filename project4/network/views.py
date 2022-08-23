@@ -5,24 +5,16 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Count
 import json
 
 from .models import User, Posting
 
 
 def index(request):
-    # Make request to get all posts
-    postings = Posting.objects.all()
-
-    # Sort by timestamp
-    
-    # For each post add div
-        #Display Number of Likes
-        #Display author
-        #Display Timestamp
-        #Display Content
-
-    # Add new divs to display
+    # Make request to get all posts sorted by descending timestamp 
+    postings = Posting.objects.all().order_by('-timestamp')
+    postings = Posting.objects.annotate(Count('liked'))
     return render(request, "network/index.html", {"postings": postings})
 
 

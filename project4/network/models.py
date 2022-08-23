@@ -4,6 +4,10 @@ from django.db import models
 
 
 class User(AbstractUser):
+    #following
+
+    #followed by
+    
     def __str__(self):
         return self.username
 
