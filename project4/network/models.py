@@ -4,10 +4,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    #following
-
-    #followed by
-    
+    following = models.ManyToManyField('self', symmetrical=False, related_name='followers', blank=True, null=True)
     def __str__(self):
         return self.username
 
@@ -17,3 +14,4 @@ class Posting(models.Model):
     liked = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='likes')
     timestamp = models.DateTimeField(auto_now_add=True)
     body = models.TextField(blank=True)
+
