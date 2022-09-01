@@ -86,5 +86,4 @@ def profile(request, author):
     following = get_author.following.count()
     followers = get_author.followers.count()
     posts = Posting.objects.filter(author=get_author).order_by('-timestamp')
-    
-    return render(request, "network/profile.html")
+    return render(request, "network/profile.html", {"author": get_author, "following": following, "followers": followers, "posts": posts})

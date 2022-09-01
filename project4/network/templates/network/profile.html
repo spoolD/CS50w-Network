@@ -7,9 +7,23 @@
 
 {% block body %}
 <p>follow/unfollow button</p>
-<p>number of followers</p>
-<p>number following</p>
-<p>posts by user</p>
+<p>{{author.username}}</p>
+<p>Following: {{following}}</p>
+<p>Followers: {{followers}}</p>
+
+{% for post in posts %}
+    <div class="post">
+        <div>
+            <div class="author">
+                <a href= "{% url 'profile' post.author.username %}">{{post.author.username}}</a> 
+            </div>
+            <div class="likes">Likes: {{post.liked__count}}</div>
+        </div>
+            <p class="timestamp">{{post.timestamp}}</p>
+            <p class="post-content">{{post.body}}</p>  
+    </div>
+
+{% endfor %}
  
         
 {% endblock %}
