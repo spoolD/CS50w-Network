@@ -79,3 +79,12 @@ def post(request):
      )
     post.save()
     return JsonResponse({"message": "Added post successfully."}, status=201)
+
+
+def profile(request, author):
+    get_author = User.objects.get(username=author)
+    following = get_author.following.count()
+    followers = get_author.followers.count()
+    posts = Posting.objects.filter(author=get_author).order_by('-timestamp')
+    
+    return render(request, "network/profile.html")

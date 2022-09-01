@@ -14,7 +14,9 @@
     {% for posting in postings %}
         <div class="post">
             <div>
-                <div class="author">{{posting.author.username}}</div>
+                <div class="author">
+                   <a href= "{% url 'profile' posting.author.username %}">{{posting.author.username}}</a> 
+                </div>
                 <div class="likes">Likes: {{posting.liked__count}}</div>
             </div>
                 <p class="timestamp">{{posting.timestamp}}</p>
