@@ -21,12 +21,45 @@
     justify-content: space-between;
 }
 
-.author {
+.author,
+.follow-number {
     font: 20pt bold; 
 }
 .timestamp{
     font: 9pt thin;
 }
-.post-content{
+.post-content,
+.follow-text {
     font: 16pt bold;
 }
+
+.profile-container{
+    display: flex;
+    gap: 50px;
+    margin: 10px 50px;
+    justify-content: space-between;
+}
+.follow-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
+.follow-container div{
+    display: flex;
+    justify-content: space-around;
+    gap: 50px;
+}
+
+#person{
+    font: 36pt bold;
+}
+
+.button-style{
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color:rgb(156, 183, 206);
+    color:white;
+    width: 125px;
+}
+
