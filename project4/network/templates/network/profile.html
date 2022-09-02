@@ -2,12 +2,18 @@
 {% load static %}
 
 {% block script %}
-    
+    <script src="{% static 'network/follow.js' %}"></script>
 {% endblock %}
 
 {% block body %}
-<p>follow/unfollow button</p>
-<p>{{author.username}}</p>
+
+{% if user.is_authenticated %}
+    {% if follow_button %}
+        <button>{{button_text}}</button>
+    {% endif %}
+{% endif %}
+
+<p id="person">{{author.username}}</p>
 <p>Following: {{following}}</p>
 <p>Followers: {{followers}}</p>
 

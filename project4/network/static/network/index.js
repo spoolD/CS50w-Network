@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
     function addPost(){
-        
-
         // Get value from textarea
         postContent = document.getElementById('new-post-text').value
         

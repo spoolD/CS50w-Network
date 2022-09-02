@@ -86,4 +86,40 @@ def profile(request, author):
     following = get_author.following.count()
     followers = get_author.followers.count()
     posts = Posting.objects.filter(author=get_author).order_by('-timestamp')
-    return render(request, "network/profile.html", {"author": get_author, "following": following, "followers": followers, "posts": posts})
+    
+    # Intializes variable so you can't follow/unfollow yourself
+    if request.user == get_author.username:
+        follow_button = False
+    else: 
+        follow_button = True
+
+    # Determine whether the button should initially say follow or unfollow
+    user = User.objects.get(username=request.user)
+    try:
+        check_follow = user.following.get(username=author)
+    except:
+        check_follow = None
+        
+    if check_follow:
+        button_text = 'Unfollow'
+    else:
+         button_text = 'Follow'
+
+    return render(request, "network/profile.html", {"author": get_author, "following": following, "followers": followers, "posts": posts, "follow_button": follow_button, "button_text": button_text})
+
+@csrf_exempt
+@login_required
+def follow(request):
+    # Get data from JSON request
+    data = json.loads(request.body)
+    current_user = User.objects.get(username=request.user)
+    action = data.get("type", "")
+    person = User.objects.get(username = data.get("person", ""))
+    
+    # Update database with request
+    if action == 'Follow':
+        current_user.following.add(person)
+        return JsonResponse({"message": "Followed successfully."}, status=201)
+    else:
+        current_user.following.remove(person)
+        return JsonResponse({"message": "Unfollowed successfully."}, status=201)
