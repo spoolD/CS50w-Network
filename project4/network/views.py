@@ -12,9 +12,17 @@ from .models import User, Posting
 
 
 def index(request):
-    # Make request to get all posts sorted by descending timestamp 
-    postings = Posting.objects.all().order_by('-timestamp')
-    postings = Posting.objects.annotate(Count('liked'))
+    
+    if request.path == '/following':
+        # Make request to get all posts from people followed
+        user = User.objects.get(username=request.user)
+        postings = Posting.objects.filter(author__in=user.following.all())
+    
+    else:
+        # Make request to get all posts sorted by descending timestamp 
+        postings = Posting.objects.all().order_by('-timestamp')
+        postings = Posting.objects.annotate(Count('liked'))
+        
     return render(request, "network/index.html", {"postings": postings})
 
 
