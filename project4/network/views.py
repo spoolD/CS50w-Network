@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Count
+from django.core.paginator import Paginator
 import json
 
 from .models import User, Posting
@@ -22,7 +23,11 @@ def index(request):
         # Make request to get all posts sorted by descending timestamp 
         postings = Posting.objects.all().order_by('-timestamp')
         postings = Posting.objects.annotate(Count('liked'))
-        
+
+    #Turn query into Paginator object
+    page_test = Paginator(postings, 10)
+    print(page_test.count)  
+    print(page_test.page(1)) 
     return render(request, "network/index.html", {"postings": postings})
 
 
