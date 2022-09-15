@@ -6,10 +6,13 @@
 {% endblock %}
 
 {% block body %}
-    <div class="new-post">
-        <textarea class="form-control" id="new-post-text" placeholder="What's on your mind?"></textarea>
-        <input type="submit" class="button-style" id="add-post" value="Post">
-    </div>
+
+    {% if user.is_authenticated %}
+        <div class="new-post">
+            <textarea class="form-control" id="new-post-text" placeholder="What's on your mind?"></textarea>
+            <input type="submit" class="button-style" id="add-post" value="Post">
+        </div>
+    {% endif %}
 
     {% for posting in page_obj%}
         <div class="post">
