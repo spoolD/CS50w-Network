@@ -17,18 +17,19 @@ def index(request):
     if request.path == '/following':
         # Make request to get all posts from people followed
         user = User.objects.get(username=request.user)
-        postings = Posting.objects.filter(author__in=user.following.all())
+        postings = Posting.objects.filter(author__in=user.following.all()).order_by('-timestamp').annotate(Count('liked'))
     
     else:
-        # Make request to get all posts sorted by descending timestamp 
-        postings = Posting.objects.all().order_by('-timestamp')
-        postings = Posting.objects.annotate(Count('liked'))
-
+        # Make request to get all posts sorted by descending timestamp and annotate number of likes
+        postings = Posting.objects.all().order_by('-timestamp').annotate(Count('liked'))
+        
     #Turn query into Paginator object
-    page_test = Paginator(postings, 10)
-    print(page_test.count)  
-    print(page_test.page(1)) 
-    return render(request, "network/index.html", {"postings": postings})
+    paginator = Paginator(postings, 4)
+
+    # Get page requested
+    page_obj = paginator.get_page(request.GET.get('page', 1))
+   
+    return render(request, "network/index.html", {"postings": postings, "num_pages": range(1, paginator.num_pages + 1), "page_obj": page_obj})
 
 
 def login_view(request):
