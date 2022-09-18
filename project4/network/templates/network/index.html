@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block script %}
-    <script src="{% static 'network/index.js' %}"></script> 
+    <script src="{% static 'network/index.js' %}"></script>
+    <script src="{% static 'network/edit.js' %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -16,17 +17,23 @@
 
     {% for posting in page_obj%}
         <div class="post">
-            <div>
+            <div class="post-author-likes">
                 <div class="author">
                 <a href= "{% url 'profile' posting.author.username %}">{{posting.author.username}}</a> 
                 </div>
                 <div class="likes">Likes: {{posting.liked__count}}</div>
-            </div>
+            </div class="post-timestamp-content">
                 <p class="timestamp">{{posting.timestamp}}</p>
-                <p class="post-content">{{posting.body}}</p>  
+                <p class="post-content">{{posting.body}}</p> 
+            {% if user == posting.author %} 
+                <div class="button-container">
+                    <button class="button-style edit-button">Edit</button>
+                </div>
+            {% endif %}
+           
         </div>   
     {% endfor %}
-
+   
     <ul class="pagination">
         <li class="page-item">
         

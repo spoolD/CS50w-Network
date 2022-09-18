@@ -24,7 +24,7 @@ def index(request):
         postings = Posting.objects.all().order_by('-timestamp').annotate(Count('liked'))
         
     #Turn query into Paginator object
-    paginator = Paginator(postings, 4)
+    paginator = Paginator(postings, 10)
 
     # Get page requested
     page_obj = paginator.get_page(request.GET.get('page', 1))

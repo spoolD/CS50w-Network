@@ -16,7 +16,8 @@
     padding: 5px 15px;
 }
 
-.post div{
+.post-author-likes,
+.post-timestamp-content {
     display: flex;
     justify-content: space-between;
 }
@@ -31,6 +32,10 @@
 .post-content,
 .follow-text {
     font: 16pt bold;
+}
+
+.post-content{
+    margin-bottom: 10px;
 }
 
 .profile-container{
@@ -65,5 +70,15 @@
 
 .pagination {
     justify-content: center;
+}
+
+.button-container{
+    display: flex;
+    justify-content: flex-end;
+}
+.edit-button,
+.save-button {
+    margin-top: 0px;
+    width: 75px;
 }
 
