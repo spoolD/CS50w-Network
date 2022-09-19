@@ -150,6 +150,18 @@ def follow(request):
 @csrf_exempt
 @login_required
 def like(request):
+    user = User.objects.get(username=request.user)
     data = json.loads(request.body)
-    print(data)
-    return JsonResponse({"message": "Unfollowed successfully."}, status=201)
+    post = Posting.objects.get(pk=data["id"])
+    
+    # User hasn't liked yet
+    if request.user not in post.liked.all():
+        post.liked.add(user)
+        post.save()
+        likes = post.liked.count()
+        return JsonResponse({"message": "Liked successfully.", "likes": likes}, status=201)
+    # User already liked
+    else:
+        likes = post.liked.count()
+        return JsonResponse({"message": "User already liked.","likes": likes}, status=201)
+    

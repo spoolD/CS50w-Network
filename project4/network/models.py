@@ -11,7 +11,7 @@ class User(AbstractUser):
 class Posting(models.Model):
     #relationship to User, timestamp, body, users who like
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posted_by')
-    liked = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='likes')
+    liked = models.ManyToManyField(User, null=True, blank=True, related_name='likes')
     timestamp = models.DateTimeField(auto_now_add=True)
     body = models.TextField(blank=True)
 

@@ -16,10 +16,12 @@ function like(event){
         method: 'PUT',
         body: JSON.stringify({
             id: postDiv.querySelector('.id').textContent  
-        })
+            })
         })
         .then(response => response.json())
         .then(result => {
-            console.log(result);
+            console.log(result['message']);
+            const likes = postDiv.querySelector('.likes > span');
+            likes.innerText = result['likes'];
         });
 }
