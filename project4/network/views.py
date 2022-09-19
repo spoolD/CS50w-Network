@@ -162,6 +162,8 @@ def like(request):
         return JsonResponse({"message": "Liked successfully.", "likes": likes}, status=201)
     # User already liked
     else:
+        post.liked.remove(user)
+        post.save()
         likes = post.liked.count()
-        return JsonResponse({"message": "User already liked.","likes": likes}, status=201)
+        return JsonResponse({"message": "Unliked succesfully.","likes": likes}, status=201)
     
