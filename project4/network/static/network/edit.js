@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function editPost(event){
     //Get post content
-    const postDiv = event.target.parentNode.parentNode;
+    const editButton = event.target;
+    const postDiv = editButton.parentNode.parentNode;
     const postContent = postDiv.querySelector('.post-content');
 
     //Create textarea element, populate with post content, and replace
@@ -22,7 +23,6 @@ function editPost(event){
     saveButton.classList.add('button-style');
     saveButton.classList.add('save-button');
     saveButton.textContent = 'Save';
-    const editButton = event.target;
     editButton.replaceWith(saveButton);
 
     saveButton.addEventListener('click', () =>{

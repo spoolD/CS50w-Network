@@ -146,3 +146,10 @@ def follow(request):
     else:
         current_user.following.remove(person)
         return JsonResponse({"message": "Unfollowed successfully."}, status=201)
+
+@csrf_exempt
+@login_required
+def like(request):
+    data = json.loads(request.body)
+    print(data)
+    return JsonResponse({"message": "Unfollowed successfully."}, status=201)
