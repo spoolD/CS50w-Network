@@ -22,10 +22,32 @@ function editPost(event){
     saveButton.classList.add('button-style');
     saveButton.classList.add('save-button');
     saveButton.textContent = 'Save';
-    event.target.replaceWith(saveButton);
+    const editButton = event.target;
+    editButton.replaceWith(saveButton);
 
     saveButton.addEventListener('click', () =>{
-        console.log('TO SAVE AND UPDATE');
-    })
+        //Update content in backend
+        fetch('/post', { 
+            method: 'PUT',
+            body: JSON.stringify({
+                id: postDiv.querySelector('.id').textContent,
+                body: editTextArea.value
+            })
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+            });
+
+        //Replace textarea with updated text
+        postContent.textContent = editTextArea.value;
+        editTextArea.replaceWith(postContent);
+
+        //Replace save button with Edit Button
+        saveButton.replaceWith(editButton);
+
+    });
     
 }
+
+

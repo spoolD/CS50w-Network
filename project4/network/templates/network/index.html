@@ -17,11 +17,15 @@
 
     {% for posting in page_obj%}
         <div class="post">
+            <div class='id' style="display:none">{{posting.id}}</div>
             <div class="post-author-likes">
                 <div class="author">
-                <a href= "{% url 'profile' posting.author.username %}">{{posting.author.username}}</a> 
+                <a  href= "{% url 'profile' posting.author.username %}">{{posting.author.username}}</a> 
                 </div>
-                <div class="likes">Likes: {{posting.liked__count}}</div>
+                <div class="likes">
+                    <button class="like-button">&#128077</button>
+                    {{posting.liked__count}}
+                </div>
             </div class="post-timestamp-content">
                 <p class="timestamp">{{posting.timestamp}}</p>
                 <p class="post-content">{{posting.body}}</p> 

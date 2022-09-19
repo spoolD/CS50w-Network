@@ -82,3 +82,9 @@
     width: 75px;
 }
 
+.like-button {
+    border:none;
+    background: rgb(245, 245, 245);
+    width: 30px;
+}
+

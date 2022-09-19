@@ -86,14 +86,23 @@ def register(request):
 @csrf_exempt
 @login_required
 def post(request):
-    data = json.loads(request.body)
-    post = Posting(
-         author = request.user,
-         body = data.get("content", ""),
-     )
-    post.save()
-    return JsonResponse({"message": "Added post successfully."}, status=201)
-
+    # New Post
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        post = Posting(
+            author = request.user,
+            body = data.get("content", ""),
+        )
+        post.save()
+        return JsonResponse({"message": "Added post successfully."}, status=201)
+    
+    # Update Post
+    else:
+        data = json.loads(request.body)
+        post = Posting.objects.get(pk=data["id"])
+        post.body = data["body"]
+        post.save()
+        return JsonResponse({"message": "updated post successfully"}, status=201)
 
 def profile(request, author):
     get_author = User.objects.get(username=author)
